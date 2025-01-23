@@ -1,0 +1,9 @@
+# IDEA stuff
+.idea/
+.vs/
+.vscode/
+*.DotSettings.user
+
+# .net stuff
+*/[Bb]in/
+*/[Oo]bj/
