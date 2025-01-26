@@ -2,13 +2,19 @@
 namespace Library;
 using System;
 
+
 class Program
 {
     static void Main(string[] args)
     {
+<<<<<<< HEAD
         var exit = false;
         var analyzer = new TextAnalyzer();
         var packageHandler = new PackageHandler();
+=======
+        bool exit = false;
+        TextAnalyzer analyzer = new TextAnalyzer();
+>>>>>>> assignment/unit-testing
 
         while (!exit)
         {
@@ -16,7 +22,10 @@ class Program
             Console.WriteLine("Library Booking System\n");
             Console.WriteLine("1. Exit program");
             Console.WriteLine("2. Analyze Text");
+<<<<<<< HEAD
             Console.WriteLine("3. Calculate Package Price");
+=======
+>>>>>>> assignment/unit-testing
             Console.Write("Select an option: ");
 
             var input = Console.ReadLine();
@@ -27,6 +36,7 @@ class Program
                     break;
                 case "2":
                     Console.Write("Enter text to analyze: ");
+<<<<<<< HEAD
                     var text = Console.ReadLine();
                     Console.WriteLine($"Word Count: {analyzer.CountWords(text)}");
                     Console.WriteLine($"Letter Count: {analyzer.CountLetters(text)}");
@@ -50,6 +60,12 @@ class Program
                             break;
                     }
                     break;
+=======
+                    string text = Console.ReadLine();
+                    Console.WriteLine($"Word Count: {analyzer.CountWords(text)}");
+                    Console.WriteLine($"Letter Count: {analyzer.CountLetters(text)}");
+                    break;
+>>>>>>> assignment/unit-testing
                 default:
                     Console.WriteLine("Invalid selection, please try again.");
                     break;

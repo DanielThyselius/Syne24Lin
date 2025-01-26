@@ -6,6 +6,7 @@ I denna övning ska du skapa en klass som analyserar en text och implementera tv
 
 ## **Instruktioner**
 
+<<<<<<< HEAD
 ### **1. Förstå `TextAnalyzer**
 
 1. Läs igenom den tillhandahållna klassen `TextAnalyzer` i [denna](../TextAnalyzer.md) fil.
@@ -13,6 +14,14 @@ I denna övning ska du skapa en klass som analyserar en text och implementera tv
    - `CountWords(string text)`: Returnerar antalet ord i den angivna strängen.
    - `CountLetters(string text)`: Returnerar antalet bokstäver (exklusive blanksteg och skiljetecken) i den angivna strängen.
 3. Analysera hur metoderna använder C#-funktioner för att dela upp texten och räkna bokstäver respektive ord.
+=======
+### **1. Förstå `TextAnalyzer`
+
+1. Läs igenom den tillhandahållna klassen `TextAnalyzer` i [denna](../TextAnalyzer.md) fil.
+2. Lägg till en implementation till metoderna:
+   - `CountWords(string text)`: Returnerar antalet ord i den angivna strängen, hint: string.Split().
+   - `CountLetters(string text)`: Returnerar antalet bokstäver (exklusive blanksteg och skiljetecken) i den angivna strängen.
+>>>>>>> assignment/unit-testing
 
 ---
 
