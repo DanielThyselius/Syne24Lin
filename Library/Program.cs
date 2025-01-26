@@ -1,13 +1,14 @@
 // See https://aka.ms/new-console-template for more information
+namespace Library;
 using System;
-
 
 class Program
 {
     static void Main(string[] args)
     {
-        bool exit = false;
-        TextAnalyzer analyzer = new TextAnalyzer();
+        var exit = false;
+        var analyzer = new TextAnalyzer();
+        var packageHandler = new PackageHandler();
 
         while (!exit)
         {
@@ -15,9 +16,10 @@ class Program
             Console.WriteLine("Library Booking System\n");
             Console.WriteLine("1. Exit program");
             Console.WriteLine("2. Analyze Text");
+            Console.WriteLine("3. Calculate Package Price");
             Console.Write("Select an option: ");
 
-            string input = Console.ReadLine();
+            var input = Console.ReadLine();
             switch (input)
             {
                 case "1":
@@ -25,9 +27,28 @@ class Program
                     break;
                 case "2":
                     Console.Write("Enter text to analyze: ");
-                    string text = Console.ReadLine();
+                    var text = Console.ReadLine();
                     Console.WriteLine($"Word Count: {analyzer.CountWords(text)}");
                     Console.WriteLine($"Letter Count: {analyzer.CountLetters(text)}");
+                    break;
+                case "3":
+                    Console.WriteLine("Select package type:");
+                    Console.WriteLine("1. Cylinder");
+                    Console.WriteLine("2. Box");
+                    var packageType = Console.ReadLine();
+
+                    switch (packageType)
+                    {
+                        case "1":
+                            // TODO: Create a Cylinder object and calculate the price
+                            break;
+                        case "2":
+                            // TODO: Create a Box object and calculate the price
+                            break;
+                        default:
+                            Console.WriteLine("Invalid package type selection.");
+                            break;
+                    }
                     break;
                 default:
                     Console.WriteLine("Invalid selection, please try again.");
