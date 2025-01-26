@@ -6,8 +6,8 @@ class Program
 {
     static void Main(string[] args)
     {
-        bool exit = false;
-        TextAnalyzer analyzer = new TextAnalyzer();
+        var exit = false;
+        var analyzer = new TextAnalyzer();
 
         while (!exit)
         {
@@ -17,7 +17,7 @@ class Program
             Console.WriteLine("2. Analyze Text");
             Console.Write("Select an option: ");
 
-            string input = Console.ReadLine();
+            var input = Console.ReadLine();
             switch (input)
             {
                 case "1":
@@ -25,7 +25,7 @@ class Program
                     break;
                 case "2":
                     Console.Write("Enter text to analyze: ");
-                    string text = Console.ReadLine();
+                    var text = Console.ReadLine();
                     Console.WriteLine($"Word Count: {analyzer.CountWords(text)}");
                     Console.WriteLine($"Letter Count: {analyzer.CountLetters(text)}");
                     break;
