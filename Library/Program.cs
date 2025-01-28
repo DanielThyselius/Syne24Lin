@@ -1,5 +1,5 @@
 // See https://aka.ms/new-console-template for more information
-using Library;
+namespace Library;
 using System;
 
 
@@ -10,6 +10,9 @@ class Program
         var exit = false;
         var analyzer = new TextAnalyzer();
         var library = new LibrarySystem();
+
+        var packageHandler = new PackageHandler();
+
         while (!exit)
         {
             Console.Clear();
@@ -19,6 +22,7 @@ class Program
             Console.WriteLine("3. List resources");
             Console.WriteLine("4. Find resource");
             Console.WriteLine("5. Book a resource");
+            Console.WriteLine("6. Calculate Package Price");
 
             Console.Write("Select an option: ");
 
@@ -70,6 +74,27 @@ class Program
                         );
                     break;
 
+
+                case "6":
+                    Console.WriteLine("Select package type:");
+                    Console.WriteLine("1. Cylinder");
+                    Console.WriteLine("2. Box");
+                    var packageType = Console.ReadLine();
+
+                    switch (packageType)
+                    {
+                        case "1":
+                            // TODO: Create a Cylinder object and calculate the price
+                            break;
+                        case "2":
+                            // TODO: Create a Box object and calculate the price
+                            break;
+                        default:
+                            Console.WriteLine("Invalid package type selection.");
+                            break;
+                    }
+                    break;
+                    
                 default:
                     Console.WriteLine("Invalid selection, please try again.");
                     break;

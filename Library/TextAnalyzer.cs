@@ -5,13 +5,13 @@ public class TextAnalyzer
 {
     public int CountWords(string text)
     {
-        // Todo: Implement word count logic
-        throw new NotImplementedException();
+        if (string.IsNullOrWhiteSpace(text)) return 0;
+        return text.Split(new[] {' ', '\n', '\t'}, StringSplitOptions.RemoveEmptyEntries).Length;
     }
 
     public int CountLetters(string text)
     {
-        // Todo: Implement letter count logic
-        throw new NotImplementedException();
+        if (string.IsNullOrWhiteSpace(text)) return 0;
+        return text.Count();
     }
 }
