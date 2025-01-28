@@ -8,7 +8,7 @@ namespace Library.Models
 {
     internal class Computer : Resource, IBookable
     {
-        public bool Book(string userName)
+        public bool CreateBooking(string userName)
         {
             throw new NotImplementedException();
         }

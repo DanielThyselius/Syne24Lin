@@ -10,6 +10,12 @@ namespace Library.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        protected bool IsAvailable { get; set; }
+        public bool IsAvailable
+        {
+            //get => BookedBy == null;
+            get; protected set;
+        }
+
+        public string? BookedBy { get; protected set; }
     }
 }

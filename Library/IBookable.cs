@@ -8,8 +8,7 @@ namespace Library
 {
     internal interface IBookable
     {
-        bool Book(string userName);
+        bool CreateBooking(string userName);
         void CancelBooking();
-        bool CheckAvailability();
     }
 }

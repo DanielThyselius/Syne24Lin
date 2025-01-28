@@ -8,19 +8,18 @@ namespace Library.Models
 {
     internal class Book : Resource, IBookable
     {
-        bool IBookable.Book(string userName)
+        public bool CreateBooking(string userName)
         {
-            throw new NotImplementedException();
+            BookedBy = userName;
+            IsAvailable = false;
+            return true;
         }
 
         public void CancelBooking()
         {
-            throw new NotImplementedException();
+            BookedBy = null;
+            IsAvailable = true;
         }
 
-        public bool CheckAvailability()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

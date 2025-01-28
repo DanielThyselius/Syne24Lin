@@ -9,28 +9,31 @@ namespace Library.Tests
 {
     public class CalculatorTest
     {
-        [Fact]
-        public void CanAddNumbers()
-        {
-            // Arrange 
-             var sut = new Calculator();
 
-            // Act
-            var actual = sut.Add(1, 2);
-
-            // Assert
-            Assert.Equal(3, actual);
-        }
-
-        [Fact]
-        public void CanSubtractNumbers()
+        [Theory]
+        [MemberData(nameof(TestData.AdditionData), MemberType = typeof(TestData))]
+        public void CanAddNumbers(float a, float b, float expected)
         {
             // Arrange 
             var sut = new Calculator();
-            var expected = 1;
 
             // Act
-            var actual = sut.Subtract(3, 2);
+            var actual = sut.Add(a, b);
+
+            // Assert
+            Assert.Equal(expected, actual);
+        }
+
+        [Theory]
+        [MemberData(nameof(TestData.SubtractionData), MemberType = typeof(TestData))]
+        [InlineData(float.MinValue, float.MaxValue, float.NegativeInfinity)]
+        public void CanSubtractNumbers(float a, float b, float expected)
+        {
+            // Arrange 
+            var sut = new Calculator();
+
+            // Act
+            var actual = sut.Subtract(a, b);
 
             // Assert
             Assert.Equal(expected, actual);

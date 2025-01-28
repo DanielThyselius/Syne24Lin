@@ -7,22 +7,24 @@ using System.Threading.Tasks;
 
 namespace Library
 {
-    internal class LibrarySystem
+    public class LibrarySystem
     {
-        public List<Resource> Resources { get; set; } = new List<Resource>();
+        internal List<Resource> Resources { get; set; } = new List<Resource>();
 
         public LibrarySystem()
         {
             // Add some demo resources to the library
             GetDemoResources();
+            // Simulate a long running operation
+            Task.Delay(2000).Wait();
         }
 
-        public Resource? GetResource(int id)
+        internal Resource? GetResource(int id)
         {
             return Resources.FirstOrDefault(r => r.Id == id);
         }
 
-        public Resource? GetResource(string name)
+        internal Resource? GetResource(string name)
         {
             return Resources.FirstOrDefault(r => r.Name == name);
         }
@@ -37,13 +39,24 @@ namespace Library
 
             if (resource is IBookable bookable)
             {
-                return bookable.Book(name);
-                
+                return bookable.CreateBooking(name);
+
             }
             return false;
         }
 
-            private void GetDemoResources()
+        public bool CancelBooking(int id)
+        {
+            var res = Resources.FirstOrDefault(r => r.Id == id);
+            if (res is IBookable bookable)
+            {
+                bookable.CancelBooking();
+                return true;
+            }
+            return false;
+        }
+
+        private void GetDemoResources()
         {
             Resources.Add(new Book()
             {

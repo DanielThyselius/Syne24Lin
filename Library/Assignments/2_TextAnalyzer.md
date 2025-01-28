@@ -32,7 +32,7 @@ I denna övning ska du skapa en klass som analyserar en text och implementera tv
   - En enkel mening, exempelvis två ord.
   - En mening med flera mellanslag.
   - En tom sträng.
-  - Vad med? (hint: testa strängen ",,")
+  - Vad mer? (hint: testa strängen ",,")
 
 #### **Test 2: Verifiera bokstavsräkning**
 - Testa att `CountLetters` returnerar rätt antal bokstäver för olika typer av indata:
