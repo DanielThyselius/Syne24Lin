@@ -22,5 +22,10 @@ namespace Library.Models
         {
             throw new NotImplementedException();
         }
+
+        public int GetLateFee(int days)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

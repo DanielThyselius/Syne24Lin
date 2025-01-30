@@ -51,8 +51,6 @@ namespace Library.Tests
             Assert.Null(sut.BookedBy);
         }
 
-
-
         [Fact]
         public void CancelBooking()
         {
@@ -65,6 +63,37 @@ namespace Library.Tests
 
             // Assert
             Assert.True(sut.IsAvailable);
+        }
+
+        [Theory]
+        [InlineData(0, 0)]
+        [InlineData(21, 0)]
+        [InlineData(20, 0)]
+        [InlineData(22, 10)]
+        [InlineData(31, 100)]
+        [InlineData(51, 300)]
+        [InlineData(52, 300)]
+        public void LateFeeCalculatesCorrectly( int days, int expected)
+        {
+            // Låneperiod: 21 dagar
+            // Förseningsavgift: 10 kr / dag
+            // Maxavgift: 300 kr(30 + dagar)
+
+            // Arrange
+            var book = new Book()
+            {
+                Name = "Test"
+            };
+            var actual = 0;
+
+            // Act
+            if (book is IBookable sut)
+            {
+                actual = sut.GetLateFee(days);
+            }
+
+            // Assert
+            Assert.Equal(expected, actual);
         }
     }
 }

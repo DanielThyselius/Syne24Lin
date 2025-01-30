@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Library.Models
 {
+    // TODO: Do we need an abstract class AND an interface?
     internal abstract class Resource
     {
         public int Id { get; set; }
@@ -16,6 +17,7 @@ namespace Library.Models
             get; protected set;
         }
 
+        // TODO: move to bookable?
         public string? BookedBy { get; protected set; }
     }
 }

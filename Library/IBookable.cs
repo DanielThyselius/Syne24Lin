@@ -10,5 +10,7 @@ namespace Library
     {
         bool CreateBooking(string userName);
         void CancelBooking();
+
+        int GetLateFee(int days);
     }
 }
