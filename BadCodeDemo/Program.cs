@@ -1,29 +1,19 @@
 ﻿// This is NOT how you should be coding!
+namespace BadCodeDemo;
+public class Program
+{
+    private static void Main(string[] args)
+    {
+        var db = new Database();
+        var service = new ReceiptService(db);
 
-var db = new Database();
-var now = DateTime.Now;
-var discount = (now.DayOfWeek == DayOfWeek.Friday) ? 25f : 0f;
-Console.WriteLine("Vad vill du köpa?");
-var item = Console.ReadLine();
-var price = db.GetItemPrice(item);
-Console.WriteLine("Hur många?");
-var quantity = float.Parse(Console.ReadLine());
+        float total = service.GetTotal();
+        var receipt = service.CreateReceipt(total);
 
+        Console.WriteLine(receipt);
+    }
 
-
-var total = price * quantity * (1 - (discount / 100));
-
-Console.WriteLine($"""
-                   ********************************
-                   KVITTO
-                   {item}({price}) x {quantity}
-                   rabatt: {discount}%
-                   Total price: {total}:-
-                   ~~~~~~~~~~~~~~~~~~~~~ 
-                   {now}
-                   ********************************
-                   """);
-
+}
 
 
 
