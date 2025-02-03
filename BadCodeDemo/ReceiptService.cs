@@ -10,43 +10,39 @@ namespace BadCodeDemo
 {
     public class ReceiptService
     {
-        private Database db;
-        private DateTime now;
-        private float discount;
-        private float price;
-        private float quantity;
-        private string item;
+        private readonly IDatabase _db;
+        private readonly IDateTimeWrapper _timeWrapper;
+        private float Discount => _timeWrapper.Now.DayOfWeek == DayOfWeek.Friday ? 25f : 0f;
 
-        public ReceiptService(Database database)
+
+        public ReceiptService(IDatabase database, IDateTimeWrapper timeWrapper)
         {
-            db = database;
-            now = DateTime.Now;
-            discount = now.DayOfWeek == DayOfWeek.Friday ? 25f : 0f;
-
-            Console.WriteLine("Vad vill du köpa?");
-            item = Console.ReadLine();
-            price = db.GetItemPrice(item);
-
-            Console.WriteLine("Hur många?");
-            quantity = float.Parse(Console.ReadLine());
+            _db = database;
+            _timeWrapper = timeWrapper;
         }
 
-        public float GetTotal()
+        public float GetTotal(float price, float quantity)
         {
-            return price * quantity * (1 - discount / 100);
+            return price * quantity * (1 - Discount / 100);
+        }
+        public float GetPrice(string item)
+        {
+            return _db.GetItemPrice(item);
         }
 
-        public string CreateReceipt(float total)
+        public string CreateReceipt(string item, float quantity)
         {
+            var price = GetPrice(item);
+            var total = GetTotal(price, quantity);
             var format = new CultureInfo("sv-SE", false).NumberFormat;
             return $"""
                        ********************************
                        KVITTO
                        {item}({price}) x {quantity}
-                       rabatt: {discount.ToString("F2", format)}%
-                       Total price: {total}:-
+                       rabatt: {Discount.ToString("F2", format)}%
+                       Total price: {total.ToString("F2", format)}:-
                        ~~~~~~~~~~~~~~~~~~~~~ 
-                       {now}
+                       {_timeWrapper.Now}
                        ********************************
                        """;
         }
