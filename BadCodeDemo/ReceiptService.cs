@@ -30,7 +30,7 @@ namespace BadCodeDemo
             return _db.GetItemPrice(item);
         }
 
-        public string CreateReceipt(string item, float quantity)
+        public virtual string CreateReceipt(string item, float quantity)
         {
             var price = GetPrice(item);
             var total = GetTotal(price, quantity);

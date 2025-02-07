@@ -8,6 +8,7 @@ public class Program
     {
         var db = new Database();
         var timeWrapper = new DateTimeWrapper();
+
         var service = new ReceiptService(db, timeWrapper);
 
         Console.WriteLine("Vad vill du köpa?");
@@ -26,11 +27,14 @@ public class Program
 
 public interface IDatabase
 {
+    public string Name { get; set; }
     float GetItemPrice(string id);
 }
 
 public class Database : IDatabase
 {
+    public string Name { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
     // Let's pretend this actually connects to a database
     public float GetItemPrice(string id) => new Random().Next(1, 10);
 }

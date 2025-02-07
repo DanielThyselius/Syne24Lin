@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BadCodeDemo\BadCodeDemo.csproj" />
+    <ProjectReference Include="..\OrderSystem\OrderSystem.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,3 +1,4 @@
+using Moq;
 using System.Diagnostics;
 
 namespace BadCodeDemo.Tests
@@ -7,10 +8,9 @@ namespace BadCodeDemo.Tests
         [Fact]
         public void UsesDiscountOnFriday()
         {
+            // Arrange 
             var item = "Book";
             var quantity = 2;
-
-            // Arrange 
             var expected = $"""
                    ********************************
                    KVITTO
@@ -21,68 +21,37 @@ namespace BadCodeDemo.Tests
                    2024-01-05 12:00:00
                    ********************************
                    """;
-            var db = new TestDb();
-            var timeWrapper = new TestTimeWrapper();
-            var sut = new ReceiptService(db, timeWrapper);
+
+            // setup mocks here
+            var mockDb = new Mock<IDatabase>();
+            mockDb.Setup(_ => _.GetItemPrice(It.IsAny<string>())).Returns(10);
+            mockDb.Setup(_ => _.GetItemPrice("Book")).Returns(5);
+            //mockDb.SetupProperty(x => x.Name);
+
+            var mockTimeWrapper = new Mock<IDateTimeWrapper>();
+            mockTimeWrapper.Setup(_ => _.Now).Returns(DateTime.Parse("2024-01-05 12:00:00"));
+           
+            // Create sut with mocks
+            var sut = new ReceiptService(mockDb.Object, mockTimeWrapper.Object);
+
+            // NEVER DO THIS! the sut cannot be a mock!
+            // var sut = new Mock<ReceiptService>(mockDb.Object, mockTimeWrapper.Object);
+            //sut.Setup(x => x.CreateReceipt(item, quantity)).Returns(expected);
 
             // Act
             var actual = sut.CreateReceipt(item, quantity);
 
-
             // Assert
-            Assert.Equal(expected, actual);
-        }
+            Assert.Equal(expected, actual); // state verification
 
-        //[Fact]
-        //public void CalculatesTotalRiceWithDiscount()
-        //{
-        //    // TODO: How do we test total logic
-        //    var item = "Book";
-        //    var price = 10;
-        //    var quantity = 2;
-        //    var discount = 0;
-        //    var total = 200;
-        //    var now = DateTime.Now;
-        //    // Arrange 
-        //    var expected = $"""
-        //           ********************************
-        //           KVITTO
-        //           {item}({price}) x {quantity}
-        //           rabatt: {discount}%
-        //           Total price: {total}:-
-        //           ~~~~~~~~~~~~~~~~~~~~~ 
-        //           {now}
-        //           ********************************
-        //           """;
-        //    var db = new TestDb();
-        //    var sut = new ReceiptService(db);
-
-        //    // Act
-        //    var actual = sut.CreateReceipt(item, price, quantity, discount, total, now);
-
-
-        //    // Assert
-        //    Assert.Equal(expected, actual);
-        //}
-    }
-    public class TestDb : IDatabase
-    {
-        public float GetItemPrice(string id)
-        {
-            switch (id)
-            {
-                case "Book":
-                    return 5;
-                default:
-                    return 10;
-            }
+            //mockDb.Verify(_ => _.GetItemPrice("Book"), Times.Once); // behaviour verification
         }
     }
 
-    public class TestTimeWrapper : IDateTimeWrapper
-    {
-        // Always return 2024-01-01 12:00:00
-        public DateTime Now => DateTime.Parse("2024-01-05 12:00:00");
-    }
+    //public class TestTimeWrapper : IDateTimeWrapper
+    //{
+    //    // Always return 2024-01-01 12:00:00
+    //    public DateTime Now => DateTime.Parse("2024-01-05 12:00:00");
+    //}
 
 }
