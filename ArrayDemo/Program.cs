@@ -39,15 +39,18 @@ static int BinarySearch(int[] numbers, int target)
 
     return -1;
 }
-static int FindNumber(int[] numbers, int target)
+
+static int? GetIndexOfNumber(int[] numbers, int key)
 {
     for (int i = 0; i < numbers.Length; i++)
     {
-        if (target == numbers[i])
+        if (key == numbers[i])
             return i;
     }
-    throw new KeyNotFoundException();
+
+    return null;
 }
+
 static int GetMax(int[] numbers)
 {
     var max = 0;
