@@ -4,15 +4,17 @@
 
 Func<int, bool> isDivisibleByThree = x => x % 3 == 0;
 
-var list = new List<int>() {1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+var list = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
-Console.WriteLine(DoSomethingCool(5,0));
+Console.WriteLine(DoSomethingCool(5, 0));
 
-static int DoSomethingCool(int a, int b) {
+static int DoSomethingCool(int a, int b)
+{
     var result = 0;
     try
     {
         result = a / b;
+        return result;
     }
     catch (DivideByZeroException ex)
     {
@@ -23,7 +25,6 @@ static int DoSomethingCool(int a, int b) {
     {
         Console.WriteLine("We did something cool!");
     }
-    return result;
 }
 Console.ReadKey();
 
