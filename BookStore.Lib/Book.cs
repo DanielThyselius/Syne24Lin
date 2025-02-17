@@ -1,11 +1,11 @@
 ﻿namespace BookStore.Lib;
 public record Book
 {
+    public int Id { get; set; }
     public string? Title { get; set; }
     public string? Author { get; set; }
-    public int Id { get; set; }
-    public string? Review { get; set; }
     public string? Description { get; set; }
+    public string? Review { get; set; }
 
     public static List<Book> GetSampleData()
     {

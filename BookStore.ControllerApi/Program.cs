@@ -1,6 +1,7 @@
-using BookStore.Lib;
 
-namespace BookStore.Api
+using BookStore.ControllerApi.Services;
+
+namespace BookStore.ControllerApi
 {
     public class Program
     {
@@ -9,11 +10,13 @@ namespace BookStore.Api
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddAuthorization();
 
+            builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddSingleton<IBookService, BookService>();
 
             var app = builder.Build();
 
@@ -23,21 +26,11 @@ namespace BookStore.Api
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
             app.UseHttpsRedirection();
-
             app.UseAuthorization();
 
-    
 
-
-            app.MapGet("/books", (HttpContext httpContext) =>
-            {
-                var books = Book.GetSampleData();
-                return books;
-            })
-            .WithName("Hämta alla böcker")
-            .WithOpenApi();
+            app.MapControllers();
 
             app.Run();
         }
