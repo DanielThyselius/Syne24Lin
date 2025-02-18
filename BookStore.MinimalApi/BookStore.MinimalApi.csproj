@@ -15,4 +15,8 @@
     <ProjectReference Include="..\BookStore.Lib\BookStore.Lib.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\index.html" />
+  </ItemGroup>
+
 </Project>

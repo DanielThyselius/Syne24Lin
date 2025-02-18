@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<script>
+    // Call the API to get books
+    fetch('https://localhost:7115/api/books')
+        .then(response => response.json())
+        .then(data => {
+            // display the books
+            data.forEach(book => {
+                // add book to the list
+                var li = document.createElement("li");
+                li.appendChild(document.createTextNode(book.title + " by " + book.author));
+                document.getElementById("books").appendChild(li);
+            });
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+
+</script>
+<body>
+    <h1>Book Store</h1>
+    <ol id="books">
+
+    </ol>
+
+</body>
+</html>
