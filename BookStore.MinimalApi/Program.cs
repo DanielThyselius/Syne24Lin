@@ -1,8 +1,6 @@
 
-using BookStore.Lib;
 using BookStore.MinimalApi.Endpoints;
 using BookStore.MinimalApi.Services;
-using Microsoft.AspNetCore.Mvc;
 
 namespace BookStore.MinimalApi
 {
@@ -19,6 +17,7 @@ namespace BookStore.MinimalApi
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddSingleton<IBookService, BookService>();
+
 
             var app = builder.Build();
 

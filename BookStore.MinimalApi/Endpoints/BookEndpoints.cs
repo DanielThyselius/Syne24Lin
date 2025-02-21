@@ -1,5 +1,6 @@
 ﻿using BookStore.Lib;
 using BookStore.MinimalApi.Services;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookStore.MinimalApi.Endpoints
@@ -18,7 +19,7 @@ namespace BookStore.MinimalApi.Endpoints
             // Get by Id
             app.MapGet("/api/books/{id}", (int id, IBookService service) =>
             {
-                return service.Books.Find(x => x.Id == id);
+                return service.GetBookById(id);
             });
 
             // Post
@@ -27,9 +28,18 @@ namespace BookStore.MinimalApi.Endpoints
                 [FromBody] Book book,
                 [FromServices] IBookService service) =>
             {
+                var validator = new BookValidator();
+                var result = validator.Validate(book);
+                if (!result.IsValid)
+                    return Results.BadRequest(result.Errors.Select(x => new { 
+                        Field = x.PropertyName,
+                        Message = x.ErrorMessage
+                    }));
+
                 var newId = service.Books.Max(x => x.Id) + 1;
                 book.Id = newId;
                 service.Books.Add(book);
+                return Results.Created($"/api/books/{newId}", book);
             });
 
             // PATCH
@@ -53,6 +63,15 @@ namespace BookStore.MinimalApi.Endpoints
 
                 return service.Books.Remove(book) ? Results.NoContent() : Results.NotFound(id);
             });
+        }
+    }
+
+    public class BookValidator : AbstractValidator<Book>
+    {
+        public BookValidator()
+        {
+            RuleFor(x => x.Title).NotEmpty().WithMessage("The book needs a title");
+            RuleFor(x => x.Author).NotEmpty().WithMessage("The book needs an author");
         }
     }
 }

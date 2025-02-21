@@ -14,4 +14,8 @@
     <ProjectReference Include="..\BookStore.Lib\BookStore.Lib.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\Book\" />
+  </ItemGroup>
+
 </Project>
